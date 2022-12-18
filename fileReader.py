@@ -3,6 +3,8 @@ import csv
 import os
 import PyPDF2
 import json
+from main import app
+
 courses = []
 notTaken = []
 
@@ -11,8 +13,7 @@ def readJsonFile():
    with open('upload.json', 'r') as openfile:
       # Reading from json file
       jsonFile = json.load(openfile)
-      fileName = "uploads/" + jsonFile["fileName"]
-      #print(fileName)
+      fileName = "instance/htmlfi/" + jsonFile["fileName"]
    return fileName
 
 def readJsonTrack():
@@ -75,36 +76,40 @@ class course:
 
 #stand-in function for student interface module
 def getUserTrack():
-    drop = readJsonTrack()
-    match drop:
-        #software systems
-        case "Software Systems":
-            course_requirements = "Tracks\Software Systems Track.csv"
-            populateCourseArray(course_requirements)
+  course_requirements = "instance/Tracks/Software Systems Track.csv"
+  populateCourseArray(course_requirements)
+  '''
+  drop = readJsonTrack()
+  #match drop:
+  match c:
+    #software systems
+    case "Software Systems":
+      course_requirements = "instance/Tracks/Software Systems Track.csv"
+      populateCourseArray(course_requirements)
         #education
-        case "Education":
-            course_requirements = "Tracks\Education Track.csv"
-            populateCourseArray(course_requirements)
+    case "Education":
+      course_requirements = "instance/Tracks/Education Track.csv"
+      populateCourseArray(course_requirements)
         #cybersecurity
-        case "Network Security":
-            course_requirements = "Tracks\Cybersecurity Track.csv"
-            populateCourseArray(course_requirements)
+    case "Network Security":
+      course_requirements = "instance/Tracks/Cybersecurity Track.csv"
+      populateCourseArray(course_requirements)
         #games programming
-        case "Game Development":
-            course_requirements = "Tracks\Games Programming Track.csv"
-            populateCourseArray(course_requirements)
+    case "Game Development":
+      course_requirements = "instance/Tracks/Games Programming Track.csv"
+      populateCourseArray(course_requirements)
         #web development
-        case "Web Development":
-            course_requirements = "Tracks\web development track.csv"
-            populateCourseArray(course_requirements)
+    case "Web Development":
+      course_requirements = "instance/Tracks/web development track.csv"
+      populateCourseArray(course_requirements)
         #Enterprise
-        case "Enterprise":
-            course_requirements = "Tracks\Enterprise Computing Track.csv"
-            populateCourseArray(course_requirements)
-        case "Cybersecurity":
-            course_requirements = "Tracks\Cybersecurity Track.csv"
-            populateCourseArray(course_requirements)
-
+    case "Enterprise":
+      course_requirements = "instance/Tracks/Enterprise Computing Track.csv"
+      populateCourseArray(course_requirements)
+    case "Cybersecurity":
+      course_requirements = "instance/Tracks/Cybersecurity Track.csv"
+      populateCourseArray(course_requirements)
+      '''
 
 #Creates course classes with proper attributes & appends to courses array for fast retrieval
 def populateCourseArray(path):
@@ -143,6 +148,7 @@ def getNeededClasses():
     for c in courses:
         if c.name not in notTaken:
             c.taken = True
+
 
 getUserTrack()
 getNeededClasses()
